@@ -8,12 +8,9 @@ OBJ      = main.o VMachine.o MKCpu.o Memory.o Display.o GraphDisp.o MemMapDev.o 
 LINKOBJ  = main.o VMachine.o MKCpu.o Memory.o Display.o GraphDisp.o MemMapDev.o MKGenException.o ConsoleIO.o
 BIN      = vm65
 SDLLIBS  = -L/usr/lib -lSDL2main -lSDL2
-LIBS     = -static-libgcc -m64 -g3 -ltermcap -lncurses -lpthread -lm
+LIBS     = -lqrack -static-libgcc -m64 -g3 -ltermcap -lncurses -lpthread -lm
 CLIBS    = -static-libgcc -m64 -g3
 INCS     =
-
-QRACKLIBS= qrack/build/libqrack.a
-QRACKINCS= -Iqrack/include -Iqrack/build/include 
 
 CXXINCS  = $(SDLINCS) $(QRACKINCS)
 CXXFLAGS = $(CXXINCS) -m64 -std=c++11 -Wall -pedantic -g3 -fpermissive
@@ -38,14 +35,11 @@ endif
 
 all: all-before $(BIN) bin2hex all-after
 
-$(QRACKLIBS):
-	ENABLE_OPENCL=$(ENABLE_OPENCL) ${MAKE} -C qrack/build
-
 clean: clean-custom
 	${RM} $(OBJ) testall.o $(BIN) bin2hex
 	${MAKE} -C qrack/build clean
 
-$(BIN): ${QRACKLIBS} ${OBJ}
+$(BIN): ${OBJ}
 	$(CPP) $(LINKOBJ) $(QRACKLIBS) -o $(BIN) $(LDFLAGS) $(LIBS) $(SDLLIBS)
 
 main.o: main.cpp

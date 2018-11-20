@@ -38,7 +38,7 @@
 #include <queue>
 #include "system.h"
 #include "Memory.h"
-#include "qfactory.hpp"
+#include "qrack/qfactory.hpp"
 
 using namespace std;
 
