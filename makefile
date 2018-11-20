@@ -37,7 +37,6 @@ all: all-before $(BIN) bin2hex all-after
 
 clean: clean-custom
 	${RM} $(OBJ) testall.o $(BIN) bin2hex
-	${MAKE} -C qrack/build clean
 
 $(BIN): ${OBJ}
 	$(CPP) $(LINKOBJ) $(QRACKLIBS) -o $(BIN) $(LDFLAGS) $(LIBS) $(SDLLIBS)
