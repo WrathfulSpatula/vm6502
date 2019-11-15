@@ -10,6 +10,12 @@ See [ReadMe.txt](https://github.com/vm6502q/vm6502q/blob/master/ReadMe.txt) for 
 
 Clone [qrack](https://github.org/vm6502q/qrack). Follow the instructions on that repository for installing qrack, including OpenCL support.
 
+Specify the SDL2 include directory:
+
+`export SDLDIR=/usr/include/SDL2`
+
+(...Or wherever your SDL2 headers reside on your system.)
+
 (From qrack checkout directory:)
 
 `mkdir _build && cd _build && cmake .. && make install`
