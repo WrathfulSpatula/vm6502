@@ -38,11 +38,10 @@
 #include "MKGenException.h"
 
 Qrack::QInterfaceEngine qUnitEngine = Qrack::QINTERFACE_QUNIT;
-Qrack::QInterfaceEngine qUnitSubEngine1 = Qrack::QINTERFACE_QFUSION;
 #if ENABLE_OPENCL
-Qrack::QInterfaceEngine qUnitSubEngine2 = Qrack::QINTERFACE_OPENCL;
+Qrack::QInterfaceEngine qUnitSubEngine1 = Qrack::QINTERFACE_OPENCL;
 #else
-Qrack::QInterfaceEngine qUnitSubEngine2 = Qrack::QINTERFACE_CPU;
+Qrack::QInterfaceEngine qUnitSubEngine1 = Qrack::QINTERFACE_CPU;
 #endif
 
 Qrack::QInterfacePtr qReg = NULL;
@@ -431,7 +430,7 @@ void MKCpu::InitCpu()
 	mpMem->Poke8bitImg(0x0200,OPCODE_BRK);
 
 	// Initialize the QCPU
-	qReg = Qrack::CreateQuantumInterface(qUnitEngine, qUnitSubEngine1, qUnitSubEngine2, 25, 0);
+	qReg = Qrack::CreateQuantumInterface(qUnitEngine, qUnitSubEngine1, 25, 0);
 	if (NULL == qReg) {
 		throw MKGenException("Unable to acquire QUnit");
 	}
